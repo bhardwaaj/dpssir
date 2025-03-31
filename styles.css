@@ -1,0 +1,580 @@
+.quotes-section {
+  padding: 80px 0;
+  background: #4a148c; /* Dark purple background */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.section-title {
+  color: #ffffff;
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 50px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: #ff69b4; /* Pink underline */
+}
+
+.quotes-container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.quotes-image {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.celebration-img {
+  max-width: 200px;
+  height: auto;
+  border-radius: 50%;
+  border: 5px solid #fff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.quotes-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  position: relative;
+}
+
+.quotes-column {
+  position: absolute;
+  width: 100%;
+  max-width: 600px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8) translateY(20px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.quotes-column.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1) translateY(0);
+}
+
+.quote-content {
+  background: linear-gradient(135deg, #fff8dc, #fffacd);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: translateY(0) scale(1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.2)
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.quotes-column.active .quote-content::before {
+  transform: translateX(100%);
+}
+
+.quote-content:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.quote-icon {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 24px;
+  margin: 0 5px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease 0.2s;
+}
+
+.quotes-column.active .quote-icon {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quote p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 20px 0;
+  color: #333;
+  font-family: "Kalam", cursive;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease 0.3s;
+}
+
+.quotes-column.active p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.quote cite {
+  display: block;
+  font-style: italic;
+  color: #666;
+  margin-top: 15px;
+  font-size: 16px;
+  text-align: right;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease 0.4s;
+}
+
+.quotes-column.active cite {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) translateY(50px);
+  }
+  70% {
+    transform: scale(1.1) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.8) translateY(-50px);
+  }
+}
+
+.quotes-column.pop-in {
+  animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+.quotes-column.fade-out {
+  animation: fadeOut 0.4s ease-out forwards;
+}
+
+/* Add a shimmering effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.quote-content::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  pointer-events: none;
+}
+
+@media (max-width: 992px) {
+  .quotes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .quotes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quotes-container {
+    padding: 10px;
+  }
+
+  .celebration-img {
+    max-width: 150px;
+  }
+
+  .quote p {
+    font-size: 14px;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+}
+
+.hero-section {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.profile-image img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 0 20px rgba(128, 0, 128, 0.5);
+}
+
+.name-heading {
+  color: #ffffff;
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 30px 0 15px;
+  text-transform: capitalize;
+  letter-spacing: 1px;
+}
+
+.celebration-text {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.glowing-text {
+  display: none;
+}
+
+@keyframes gentleGlow {
+  display: none;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.quote.animate {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.popup-messages {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.message-popup {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 800px;
+  width: 90%;
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.message-popup.show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.message-content {
+  text-align: center;
+  color: #ffffff;
+  position: relative;
+  padding: 20px;
+}
+
+.message-content i {
+  font-size: 24px;
+  color: #ff69b4;
+  margin: 0 10px;
+  opacity: 0.8;
+}
+
+.message-text {
+  font-family: "Kalam", cursive;
+  font-size: 24px;
+  line-height: 1.8;
+  margin: 20px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.message-popup::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #ff69b4, #4a148c);
+  border-radius: 20px;
+  z-index: -1;
+  opacity: 0.5;
+  filter: blur(10px);
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.message-popup.show .message-content {
+  animation: float 3s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .message-popup {
+    padding: 20px;
+  }
+
+  .message-text {
+    font-size: 18px;
+  }
+}
+
+/* Add a shimmer effect */
+.message-popup::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  border-radius: 20px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.sticky-notes-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #4a148c, #311b92);
+  min-height: 60vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.sticky-notes-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding: 20px;
+  perspective: 1000px;
+}
+
+.sticky-note {
+  width: 300px;
+  min-height: 300px;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.sticky-note.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.note-content {
+  background: linear-gradient(135deg, #fff9c4, #fff59d);
+  padding: 30px;
+  border-radius: 2px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.sticky-note:nth-child(2n) .note-content {
+  background: linear-gradient(135deg, #ffecb3, #ffe082);
+  transform: rotate(3deg);
+}
+
+.sticky-note:hover .note-content {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.pin {
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #e53935;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.pin::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(229, 57, 53, 0.3);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.note-content i {
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 20px;
+}
+
+.note-content p {
+  font-family: "Kalam", cursive;
+  font-size: 18px;
+  line-height: 1.6;
+  margin: 15px 0;
+  color: #333;
+}
+
+/* Add tape effect */
+.note-content::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+}
+
+/* Add shadow lift effect */
+.note-content::after {
+  content: "";
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  width: 70%;
+  height: 70%;
+  background: rgba(0, 0, 0, 0.1);
+  transform: rotate(3deg);
+  z-index: -1;
+}
+
+@media (max-width: 768px) {
+  .sticky-note {
+    width: 280px;
+    min-height: 280px;
+  }
+
+  .note-content p {
+    font-size: 16px;
+  }
+}
+
+/* Add fade-in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeInUp 0.6s ease-out forwards;
+  animation-delay: calc(var(--delay, 0) * 0.2s);
+}
+
+/* Add hover lift effect */
+.sticky-note:hover {
+  z-index: 2;
+}
+
+/* Add peeling effect on hover */
+.sticky-note:hover .note-content::after {
+  transform: rotate(5deg) translateY(-5px);
+  transition: transform 0.3s ease;
+}
